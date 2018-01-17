@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <string>
 
-
 class jconf
 {
 public:
@@ -73,6 +72,10 @@ public:
 	static void cpuid(uint32_t eax, int32_t ecx, int32_t val[4]);
 
 	slow_mem_cfg GetSlowMemSetting();
+
+  double GetDonationPercentage();
+	bool IsDonationEnabled = false;
+  double DonationPercentage = 0.02;
 
 private:
 	jconf();

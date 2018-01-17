@@ -25,9 +25,9 @@
 #include "xmrstak/backend/miner_work.hpp"
 #include "xmrstak/backend/globalStates.hpp"
 #include "xmrstak/backend/backendConnector.hpp"
-#include "xmrstak/jconf.hpp"
 #include "xmrstak/misc/console.hpp"
 #include "xmrstak/donate-level.hpp"
+#include "xmrstak/jconf.hpp"
 #include "xmrstak/params.hpp"
 #include "xmrstak/misc/configEditor.hpp"
 #include "xmrstak/version.hpp"
@@ -162,8 +162,8 @@ std::string get_multipool_entry(bool& final)
 
 	final = !read_yes_no("- Do you want to add another pool? (y/n)");
 
-	return "\t{\"pool_address\" : \"" + pool +"\", \"wallet_address\" : \"" + userName +  "\", \"pool_password\" : \"" + 
-		passwd + "\", \"use_nicehash\" : " + bool_to_str(nicehash) + ", \"use_tls\" : " + bool_to_str(tls) + 
+	return "\t{\"pool_address\" : \"" + pool +"\", \"wallet_address\" : \"" + userName +  "\", \"pool_password\" : \"" +
+		passwd + "\", \"use_nicehash\" : " + bool_to_str(nicehash) + ", \"use_tls\" : " + bool_to_str(tls) +
 		", \"tls_fingerprint\" : \"\", \"pool_weight\" : " + std::to_string(pool_weight) + " },\n";
 }
 
@@ -188,7 +188,7 @@ void do_guided_config()
 	configEditor configTpl{};
 	configTpl.set(std::string(tpl));
 	bool prompted = false;
-	
+
 	auto& currency = params::inst().currency;
 	if(currency.empty())
 	{
@@ -205,7 +205,7 @@ void do_guided_config()
 			std::cout<<"- Currency: 'monero' or 'aeon'"<<std::endl;
 			std::cin >> tmp;
 			std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
-		} 
+		}
 		currency = tmp;
 	}
 
@@ -278,7 +278,7 @@ void do_guided_config()
 		std::cout << "Miner will mine mostly at the pool with the highest weight, unless the pool fails." << std::endl;
 		std::cout << "Weight must be an integer larger than 0." << std::endl;
 		std::cout << "- Please enter a weight for this pool: "<<std::endl;
-		
+
 		while(!(std::cin >> pool_weight) || pool_weight <= 0)
 		{
 			std::cin.clear();
@@ -290,8 +290,8 @@ void do_guided_config()
 		pool_weight = 1;
 
 	std::string pool_table;
-	pool_table += "\t{\"pool_address\" : \"" + pool +"\", \"wallet_address\" : \"" + userName +  "\", \"pool_password\" : \"" + 
-		passwd + "\", \"use_nicehash\" : " + bool_to_str(nicehash) + ", \"use_tls\" : " + bool_to_str(tls) + 
+	pool_table += "\t{\"pool_address\" : \"" + pool +"\", \"wallet_address\" : \"" + userName +  "\", \"pool_password\" : \"" +
+		passwd + "\", \"use_nicehash\" : " + bool_to_str(nicehash) + ", \"use_tls\" : " + bool_to_str(tls) +
 		", \"tls_fingerprint\" : \"\", \"pool_weight\" : " + std::to_string(pool_weight) + " },\n";
 
 	if(multipool)
@@ -529,7 +529,7 @@ int main(int argc, char *argv[])
 		SelfElevate(argv[0], minerArgs);
 	}
 #endif
-	
+
 	// check if we need a guided start
 	if(!configEditor::file_exist(params::inst().configFile))
 		do_guided_config();
@@ -557,10 +557,12 @@ int main(int argc, char *argv[])
 	}
 #endif
 
+
+
 	printer::inst()->print_str("-------------------------------------------------------------------\n");
 	printer::inst()->print_str(get_version_str_short().c_str());
 	printer::inst()->print_str("\n\n");
-	printer::inst()->print_str("Brought to you by fireice_uk and psychocrypt under GPLv3.\n");
+	printer::inst()->print_str("Brought to you by fireice_uk, psychocrypt and Calvin Hartwell under GPLv3.\n");
 	printer::inst()->print_str("Based on CPU mining code by wolf9466 (heavily optimized by fireice_uk).\n");
 #ifndef CONF_NO_CUDA
 	printer::inst()->print_str("Based on NVIDIA mining code by KlausT and psychocrypt.\n");
@@ -569,7 +571,7 @@ int main(int argc, char *argv[])
 	printer::inst()->print_str("Based on OpenCL mining code by wolf9466.\n");
 #endif
 	char buffer[64];
-	snprintf(buffer, sizeof(buffer), "\nConfigurable dev donation level is set to %.1f%%\n\n", fDevDonationLevel * 100.0);
+	snprintf(buffer, sizeof(buffer), "\nConfigurable dev donation level is set to %.1f%%\n\n", fDevDonationLevel * 100);
 	printer::inst()->print_str(buffer);
 	printer::inst()->print_str("You can use following keys to display reports:\n");
 	printer::inst()->print_str("'h' - hashrate\n");

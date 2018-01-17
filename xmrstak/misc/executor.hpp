@@ -63,13 +63,16 @@ private:
 
 	inline bool is_dev_time()
 	{
-		//Add 2 seconds to compensate for connect
-		constexpr size_t dev_portion = double(iDevDonatePeriod) * fDevDonationLevel + 2;
+		if (bDonationEnabled) {
+			//Add 2 seconds to compensate for connect
+			size_t dev_portion = double(iDevDonatePeriod) * fDevDonationLevel + 2;
 
-		if(dev_portion < 12) //No point in bothering with less than 10s
-			return false;
+			if(dev_portion < 12) //No point in bothering with less than 10s
+				return false;
 
-		return (get_timestamp() - dev_timestamp) % iDevDonatePeriod >= (iDevDonatePeriod - dev_portion);
+			return (get_timestamp() - dev_timestamp) % iDevDonatePeriod >= (iDevDonatePeriod - dev_portion);
+		}
+		else return false;
 	};
 
 	std::list<timed_event> lTimedEvents;
@@ -196,4 +199,3 @@ private:
 
 	inline size_t sec_to_ticks(size_t sec) { return sec * (1000 / iTickTime); }
 };
-

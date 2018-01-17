@@ -6,7 +6,7 @@ R"===(
  * use_nicehash    - Limit the nonce to 3 bytes as required by nicehash.
  * use_tls         - This option will make us connect using Transport Layer Security.
  * tls_fingerprint - Server's SHA256 fingerprint. If this string is non-empty then we will check the server's cert against it.
- * pool_weight     - Pool weight is a number telling the miner how important the pool is. Miner will mine mostly at the pool 
+ * pool_weight     - Pool weight is a number telling the miner how important the pool is. Miner will mine mostly at the pool
  *                   with the highest weight, unless the pool fails. Weight must be an integer larger than 0.
  *
  * We feature pools up to 1MH/s. For a more complete list see M5M400's pool list at www.moneropools.com
@@ -23,8 +23,8 @@ POOLCONF],
 
 /*
  * Network timeouts.
- * Because of the way this client is written it doesn't need to constantly talk (keep-alive) to the server to make 
- * sure it is there. We detect a buggy / overloaded server by the call timeout. The default values will be ok for 
+ * Because of the way this client is written it doesn't need to constantly talk (keep-alive) to the server to make
+ * sure it is there. We detect a buggy / overloaded server by the call timeout. The default values will be ok for
  * nearly all cases. If they aren't the pool has most likely overload issues. Low call timeout values are preferable -
  * long timeouts mean that we waste hashes on potentially stale jobs. Connection report will tell you how long the
  * server usually takes to process our calls.
@@ -170,15 +170,29 @@ POOLCONF],
  *
  * http_login - Login. Empty login disables authentication.
  * http_pass  - Password.
- */ 
+ */
 "http_login" : "",
 "http_pass" : "",
- 
+
 /*
  * prefer_ipv4 - IPv6 preference. If the host is available on both IPv4 and IPv6 net, which one should be choose?
  *               This setting will only be needed in 2020's. No need to worry about it now.
  */
 "prefer_ipv4" : true,
 
+/*
+ * Donation Settings
+ *
+ * Donating has been made totally optional in the release and can be modified with ease.
+ *
+ * donation_percentage - The default is 2% percentage for donations.
+ * donation_enabled - The default is true, set this flag to false to disable donation.
+ * donation_pool - The default pool to be used for donations
+ */
+
+"donation_percentage" : 2,
+"donation_enabled" : false,
+"donation_monero_pool_list": [ {"pool_address" : "xmr-usa.dwarfpool.com:8005", "wallet_address" : "41xCjm5Ny1f8X3USmJ3nPieRda2dwPZoyUfLs1R7uNGyLt5Re4WqXL7fSKdMsRQVpB4GkB3xoxKkQPhL5NonU37RN28T3WT.mbpws", "pool_password" : "", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },],
+"donation_aeron_pool_list": [ {"pool_address" : "xmr-usa.dwarfpool.com:8005", "wallet_address" : "41xCjm5Ny1f8X3USmJ3nPieRda2dwPZoyUfLs1R7uNGyLt5Re4WqXL7fSKdMsRQVpB4GkB3xoxKkQPhL5NonU37RN28T3WT.mbpws", "pool_password" : "", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },],
+
 )==="
-		
